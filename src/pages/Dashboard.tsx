@@ -1,17 +1,15 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { AirVent, ThermometerSun, Water, AlertTriangle, MapPin } from "lucide-react";
+import { AirVent, ThermometerSun, CloudRain, AlertTriangle, MapPin } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { EnvironmentalData } from "@/types";
 import { Layout } from "@/components/layout/Layout";
 import { Progress } from "@/components/ui/progress";
 import { BarChart, LineChart, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Line } from "recharts";
 
-// Mock data (in a real app, this would come from an API)
 const mockAirData: EnvironmentalData[] = [
   {
     id: "1",
@@ -141,7 +139,6 @@ const chartData = [
   },
 ];
 
-// Helper function for status colors
 const getStatusColor = (status: string) => {
   switch (status) {
     case "good":
@@ -174,19 +171,16 @@ const getStatusBadge = (status: string) => {
 
 const getStatusProgress = (value: number, type: string) => {
   if (type === "air") {
-    // AQI scale
     if (value <= 50) return { value: (value / 50) * 100, status: "good" };
     if (value <= 100) return { value: ((value - 50) / 50) * 100, status: "moderate" };
     if (value <= 150) return { value: ((value - 100) / 50) * 100, status: "poor" };
     return { value: 100, status: "hazardous" };
   } else if (type === "water") {
-    // IQA scale (higher is better)
     if (value >= 80) return { value: ((value - 80) / 20) * 100, status: "good" };
     if (value >= 50) return { value: ((value - 50) / 30) * 100, status: "moderate" };
     if (value >= 20) return { value: ((value - 20) / 30) * 100, status: "poor" };
     return { value: 100, status: "hazardous" };
   } else {
-    // Temperature (simplified scale)
     if (value <= 25) return { value: (value / 25) * 100, status: "good" };
     if (value <= 32) return { value: ((value - 25) / 7) * 100, status: "moderate" };
     if (value <= 40) return { value: ((value - 32) / 8) * 100, status: "poor" };
@@ -200,7 +194,6 @@ const Dashboard = () => {
   const [alerts, setAlerts] = useState<EnvironmentalData[]>([]);
 
   useEffect(() => {
-    // Simulate checking for critical alerts
     const criticalItems = [
       ...mockAirData.filter(item => item.status === "poor" || item.status === "hazardous"),
       ...mockWaterData.filter(item => item.status === "poor" || item.status === "hazardous"),
@@ -283,7 +276,7 @@ const Dashboard = () => {
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {renderDataCard("Ar", <AirVent className="h-4 w-4" />, mockAirData)}
-              {renderDataCard("Água", <Water className="h-4 w-4" />, mockWaterData)}
+              {renderDataCard("Água", <CloudRain className="h-4 w-4" />, mockWaterData)}
               {renderDataCard("Temperatura", <ThermometerSun className="h-4 w-4" />, mockTemperatureData)}
             </div>
             

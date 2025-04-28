@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AirVent, ThermometerSun, Water, User, LogOut, Menu, X } from "lucide-react";
+import { CircleUser, AirVent, ThermometerSun, CloudRain, User, LogOut, Menu, X } from "lucide-react";
 
 export function Header() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -19,7 +19,7 @@ export function Header() {
 
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: AirVent },
-    { name: "Fórum", href: "/forum", icon: Water },
+    { name: "Fórum", href: "/forum", icon: CloudRain },
     { name: "Dados", href: "/data", icon: ThermometerSun },
   ];
 
@@ -70,7 +70,7 @@ export function Header() {
                   variant="ghost" 
                   className="relative h-10 w-10 rounded-full"
                 >
-                  <Avatar className="h-8 w-8 text-primary" />
+                  <CircleUser className="h-8 w-8 text-primary" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -138,3 +138,4 @@ export function Header() {
     </header>
   );
 }
+

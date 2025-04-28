@@ -27,3 +27,4 @@ export function Layout({ requireAuth, children }: LayoutProps) {
     </div>
   );
 }
+

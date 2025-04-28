@@ -1,7 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { AirVent, ThermometerSun, Water, ArrowRight } from "lucide-react";
+import { AirVent, ThermometerSun, CloudRain, ArrowRight } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const Index = () => {
@@ -15,7 +15,7 @@ const Index = () => {
       description: "Monitore índices de poluição e qualidade do ar em tempo real em diversas localidades.",
     },
     {
-      icon: Water,
+      icon: CloudRain,
       title: "Qualidade da Água",
       description: "Acompanhe indicadores de qualidade da água em rios, lagos e reservatórios.",
     },
@@ -167,3 +167,4 @@ const Index = () => {
 };
 
 export default Index;
+

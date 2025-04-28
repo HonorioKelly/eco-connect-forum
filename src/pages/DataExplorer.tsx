@@ -1,19 +1,16 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { AirVent, ThermometerSun, Water, Search, Download, MapPin } from "lucide-react";
+import { AirVent, ThermometerSun, CloudRain, Search, Download, MapPin } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { EnvironmentalData } from "@/types";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from "recharts";
 
-// Expanded mock data
 const mockData: EnvironmentalData[] = [
-  // Air quality data
   {
     id: "1",
     type: "air",
@@ -60,7 +57,6 @@ const mockData: EnvironmentalData[] = [
     status: "good",
   },
   
-  // Water quality data
   {
     id: "6",
     type: "water",
@@ -107,7 +103,6 @@ const mockData: EnvironmentalData[] = [
     status: "good",
   },
   
-  // Temperature data
   {
     id: "11",
     type: "temperature",
@@ -182,7 +177,6 @@ const trendData = {
   ]
 };
 
-// Helper function for status colors
 const getStatusColor = (status: string) => {
   switch (status) {
     case "good":
@@ -215,19 +209,16 @@ const getStatusBadge = (status: string) => {
 
 const getStatusProgress = (value: number, type: string) => {
   if (type === "air") {
-    // AQI scale
     if (value <= 50) return { value: (value / 50) * 100, status: "good" };
     if (value <= 100) return { value: ((value - 50) / 50) * 100, status: "moderate" };
     if (value <= 150) return { value: ((value - 100) / 50) * 100, status: "poor" };
     return { value: 100, status: "hazardous" };
   } else if (type === "water") {
-    // IQA scale (higher is better)
     if (value >= 80) return { value: ((value - 80) / 20) * 100, status: "good" };
     if (value >= 50) return { value: ((value - 50) / 30) * 100, status: "moderate" };
     if (value >= 20) return { value: ((value - 20) / 30) * 100, status: "poor" };
     return { value: 100, status: "hazardous" };
   } else {
-    // Temperature (simplified scale)
     if (value <= 25) return { value: (value / 25) * 100, status: "good" };
     if (value <= 32) return { value: ((value - 25) / 7) * 100, status: "moderate" };
     if (value <= 40) return { value: ((value - 32) / 8) * 100, status: "poor" };
@@ -268,7 +259,7 @@ const DataExplorer = () => {
       case "air":
         return <AirVent className="h-5 w-5" />;
       case "water":
-        return <Water className="h-5 w-5" />;
+        return <CloudRain className="h-5 w-5" />;
       case "temperature":
         return <ThermometerSun className="h-5 w-5" />;
       default:
@@ -300,7 +291,6 @@ const DataExplorer = () => {
   };
 
   const handleDownloadData = () => {
-    // In a real app, this would generate a CSV file
     alert("Dados baixados com sucesso!");
   };
 
@@ -314,7 +304,6 @@ const DataExplorer = () => {
           </p>
         </div>
 
-        {/* Search and filters */}
         <Card>
           <CardContent className="pt-6">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -364,7 +353,6 @@ const DataExplorer = () => {
           </CardContent>
         </Card>
 
-        {/* Data visualization */}
         <Tabs value={selectedTab} onValueChange={setSelectedTab}>
           <div className="flex justify-between items-center">
             <TabsList>
@@ -377,7 +365,6 @@ const DataExplorer = () => {
             </p>
           </div>
 
-          {/* Table view */}
           <TabsContent value="table" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-3">
               {sortedData.map((item) => {
@@ -426,7 +413,6 @@ const DataExplorer = () => {
             </div>
           </TabsContent>
           
-          {/* Chart view */}
           <TabsContent value="chart">
             <div className="grid gap-6">
               {dataType === "all" || dataType === "air" ? (
@@ -464,7 +450,7 @@ const DataExplorer = () => {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Water className="h-5 w-5" />
+                      <CloudRain className="h-5 w-5" />
                       Qualidade da Água
                     </CardTitle>
                     <CardDescription>Índice de qualidade da água (IQA) por localidade</CardDescription>
@@ -524,7 +510,6 @@ const DataExplorer = () => {
             </div>
           </TabsContent>
           
-          {/* Trends view */}
           <TabsContent value="trends">
             <div className="grid gap-6">
               {dataType === "all" || dataType === "air" ? (
@@ -561,7 +546,7 @@ const DataExplorer = () => {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Water className="h-5 w-5" />
+                      <CloudRain className="h-5 w-5" />
                       Tendência da Qualidade da Água
                     </CardTitle>
                     <CardDescription>Média mensal dos últimos 6 meses</CardDescription>
