@@ -2,7 +2,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { ChatInterface } from "@/components/chatbot/ChatInterface";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bot, MessageSquare } from "lucide-react";
+import { Bot } from "lucide-react";
 
 const Chatbot = () => {
   return (
@@ -35,30 +35,19 @@ const Chatbot = () => {
                   O EcoBot foi desenvolvido para ajudar com dúvidas sobre os dados ambientais coletados em nossa plataforma.
                   Ele pode responder perguntas sobre qualidade do ar, água, temperatura, tendências e muito mais.
                 </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5" />
-                  Sugestões de perguntas
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm">
-                  <li className="p-2 bg-muted/50 rounded-md hover:bg-muted cursor-pointer">
-                    Como está a qualidade do ar em São Paulo?
-                  </li>
-                  <li className="p-2 bg-muted/50 rounded-md hover:bg-muted cursor-pointer">
-                    Quais são os principais poluentes da água no Rio Tietê?
-                  </li>
-                  <li className="p-2 bg-muted/50 rounded-md hover:bg-muted cursor-pointer">
-                    Como a temperatura mudou nos últimos 5 anos?
-                  </li>
-                  <li className="p-2 bg-muted/50 rounded-md hover:bg-muted cursor-pointer">
-                    Quais são as fontes de poluição mais comuns?
-                  </li>
-                </ul>
+                <div className="mt-4">
+                  <p className="text-sm">
+                    O assistente utiliza um sistema de reconhecimento de palavras-chave para fornecer informações
+                    precisas sobre diversos tópicos ambientais. Experimente fazer perguntas sobre:
+                  </p>
+                  <ul className="mt-2 space-y-1 text-sm list-disc pl-5">
+                    <li>Qualidade do ar em diferentes regiões</li>
+                    <li>Temperatura e mudanças climáticas recentes</li>
+                    <li>Qualidade da água em rios e lagos</li>
+                    <li>Níveis de poluição e seus impactos</li>
+                    <li>Dados estatísticos ambientais</li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </div>

@@ -26,6 +26,16 @@ const botResponses = {
   "ajuda": "Posso ajudar com informações sobre qualidade do ar, água, temperatura, análises de poluição e interpretação dos dados ambientais. Basta perguntar!"
 };
 
+// Perguntas sugeridas para o usuário clicar
+const suggestedQuestions = [
+  "Qual a qualidade do ar hoje?",
+  "Qual foi a temperatura média da semana?",
+  "Como está a qualidade da água nos rios?",
+  "Quais os níveis de poluição registrados este mês?",
+  "Quais são os dados ambientais mais recentes?",
+  "Quais regiões têm melhor qualidade do ar?"
+];
+
 const generateBotResponse = (message: string): string => {
   // Converter a mensagem para minúsculas para facilitar a comparação
   const lowerMessage = message.toLowerCase();
@@ -61,13 +71,13 @@ export function ChatInterface() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSendMessage = () => {
-    if (!input.trim()) return;
+  const handleSendMessage = (messageText: string = input) => {
+    if (!messageText.trim()) return;
 
     // Adicionar mensagem do usuário
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: input,
+      content: messageText,
       isUser: true,
       timestamp: new Date(),
     };
@@ -80,7 +90,7 @@ export function ChatInterface() {
     setTimeout(() => {
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: generateBotResponse(input),
+        content: generateBotResponse(messageText),
         isUser: false,
         timestamp: new Date(),
       };
@@ -95,6 +105,10 @@ export function ChatInterface() {
       e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  const handleSuggestedQuestionClick = (question: string) => {
+    handleSendMessage(question);
   };
 
   return (
@@ -185,9 +199,25 @@ export function ChatInterface() {
             placeholder="Digite sua pergunta sobre dados ambientais..."
             className="flex-1"
           />
-          <Button onClick={handleSendMessage} disabled={!input.trim()}>
+          <Button onClick={() => handleSendMessage()} disabled={!input.trim()}>
             <Send className="h-4 w-4" />
           </Button>
+        </div>
+        <div className="mt-4">
+          <p className="text-sm font-medium text-muted-foreground mb-2">Perguntas sugeridas:</p>
+          <div className="flex flex-wrap gap-2">
+            {suggestedQuestions.map((question, index) => (
+              <Button 
+                key={index} 
+                variant="outline" 
+                size="sm" 
+                className="text-xs"
+                onClick={() => handleSuggestedQuestionClick(question)}
+              >
+                {question}
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
