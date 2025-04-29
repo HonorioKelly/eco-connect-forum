@@ -15,6 +15,7 @@ import Forum from "./pages/Forum";
 import DataExplorer from "./pages/DataExplorer";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import Chatbot from "./pages/Chatbot";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/forum" element={<Forum />} />
             <Route path="/data" element={<DataExplorer />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/chatbot" element={<Chatbot />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

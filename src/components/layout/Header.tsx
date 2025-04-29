@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CircleUser, AirVent, ThermometerSun, CloudRain, User, LogOut, Menu, X } from "lucide-react";
+import { CircleUser, AirVent, ThermometerSun, CloudRain, User, LogOut, Menu, X, Bot } from "lucide-react";
 
 export function Header() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -21,6 +21,7 @@ export function Header() {
     { name: "Dashboard", href: "/dashboard", icon: AirVent },
     { name: "Fórum", href: "/forum", icon: CloudRain },
     { name: "Dados", href: "/data", icon: ThermometerSun },
+    { name: "Chatbot", href: "/chatbot", icon: Bot }
   ];
 
   return (
@@ -138,4 +139,3 @@ export function Header() {
     </header>
   );
 }
-
